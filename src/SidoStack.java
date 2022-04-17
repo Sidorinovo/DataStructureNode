@@ -1,17 +1,17 @@
 import java.util.Iterator;
 
-public class SidoStack implements Iterable<Integer> {
+public class SidoStack<T> implements Iterable<T> {
 
     private Node last;
     private int size;
 
 
-    private static class Node {
+    private class Node {
 
-        private final int element;
+        private final T element;
         private Node previousNode;
 
-        private Node(int element) {
+        private Node(T element) {
             this.element = element;
         }
     }
@@ -20,7 +20,7 @@ public class SidoStack implements Iterable<Integer> {
         this.last = null;
     }
 
-    public void add(int element) {
+    public void add(T element) {
         Node newNode = new Node(element);
 
         newNode.previousNode = last;
@@ -29,7 +29,13 @@ public class SidoStack implements Iterable<Integer> {
         size++;
     }
 
-    public boolean remove(int element) {
+    public T pop(){
+        T result = last.element;
+        last = last.previousNode;
+        return result;
+    }
+
+    public boolean remove(T element) {
 
         if (last.element == element) {
             last = last.previousNode;
@@ -58,9 +64,9 @@ public class SidoStack implements Iterable<Integer> {
     }
 
 
-    private class SidIterator implements java.util.Iterator<Integer> {
+    private class SidIterator implements java.util.Iterator<T> {
 
-        private SidoStack.Node node;
+        private SidoStack<T>.Node node;
 
         private SidIterator() {
             node = last;
@@ -72,8 +78,8 @@ public class SidoStack implements Iterable<Integer> {
         }
 
         @Override
-        public Integer next() {
-            int result = node.element;
+        public T next() {
+            T result = node.element;
 
             if (hasNext()) {
                 node = node.previousNode;
@@ -84,7 +90,7 @@ public class SidoStack implements Iterable<Integer> {
     }
 
     @Override
-    public Iterator<Integer> iterator() {
+    public Iterator<T> iterator() {
         return new SidIterator();
     }
 }

@@ -2,7 +2,7 @@ import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
-        SidoStack coll = new SidoStack();
+        SidoStack<Integer> coll = new SidoStack<>();
         coll.add(1);
         coll.add(2);
         coll.add(3);
