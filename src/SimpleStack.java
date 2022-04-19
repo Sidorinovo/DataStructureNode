@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class SidoStack<T> implements Iterable<T> {
+public class SimpleStack<T> implements Iterable<T> {
 
     private Node last;
     private int size;
@@ -16,10 +16,6 @@ public class SidoStack<T> implements Iterable<T> {
         }
     }
 
-    public SidoStack() {
-        this.last = null;
-    }
-
     public void add(T element) {
         Node newNode = new Node(element);
 
@@ -33,6 +29,15 @@ public class SidoStack<T> implements Iterable<T> {
         T result = last.element;
         last = last.previousNode;
         return result;
+    }
+
+    public T peek(){
+        return last.element;
+    }
+
+    public void clear(){
+        this.last = null;
+        this.size = 0;
     }
 
     public boolean remove(T element) {
@@ -66,7 +71,7 @@ public class SidoStack<T> implements Iterable<T> {
 
     private class SidIterator implements java.util.Iterator<T> {
 
-        private SidoStack<T>.Node node;
+        private SimpleStack<T>.Node node;
 
         private SidIterator() {
             node = last;
